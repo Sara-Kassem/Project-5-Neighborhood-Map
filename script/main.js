@@ -106,6 +106,33 @@ var animateMarker = function (marker) {
 
 };
 
+// This functions adds a link on the infowindow
+// This links goes to the wikipedia page of the marker
+function getWikipedia (marker, infowindow) {
+    
+    var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback'
+    
+    $.ajax({
+        url: wikiUrl,
+        dataType: "jsonp",
+        // jsonp: "callback"
+        success: function (response) {
+            var articleList = response[1][0];
+            var url = 'https://en.wikipedia.org/wiki/' + articleList;
+
+            var result = '<a href = "' + url + '">Show ' + articleList + ' on Wikipedia</a>';
+
+            infowindow.setContent(result);
+        },
+
+        error: function() {
+            var error = '<div>Failed to load Wikipedia link</div>';
+
+            infowindow.setContent(error);
+        }
+    });
+}
+
 var populateInfoWindow = function (marker, infowindow) {
     
     'use strict';
@@ -123,34 +150,7 @@ var populateInfoWindow = function (marker, infowindow) {
             infowindow.setMarker = null;
         });
 
-        // This functions adds a link on the infowindow
-        // This links goes to the wikipedia page of the marker
-        function getWikipedia (marker) {
-            
-            var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback'
-            
-            $.ajax({
-                url: wikiUrl,
-                dataType: "jsonp",
-                // jsonp: "callback"
-                success: function (response) {
-                    var articleList = response[1][0];
-                    var url = 'https://en.wikipedia.org/wiki/' + articleList;
-
-                    var result = '<a href = "' + url + '">Show ' + articleList + ' on Wikipedia</a>';
-
-                    infowindow.setContent(result);
-                },
-
-                error: function() {
-                    var error = '<div>Failed to load Wikipedia link</div>';
-
-                    infowindow.setContent(error);
-                }
-            });
-        }
-
-        getWikipedia(marker);
+        getWikipedia(marker, infowindow);
 
         // Open the infowindow on the correct marker.
         infowindow.open(map, marker);
@@ -204,8 +204,6 @@ var ViewModel = function(map, bounds, largeInfowindow) {
     
     var self = this;
 
-    var map = map;
-
     // Create a new blank array for all the listing markers.
     this.markers = ko.observableArray([]);
 
@@ -217,7 +215,7 @@ var ViewModel = function(map, bounds, largeInfowindow) {
     this.showWindow = function (clickedPlace) {
         populateInfoWindow(clickedPlace, largeInfowindow);
         animateMarker(clickedPlace);
-    }
+    };
 
     // This function will loop through the markers array and display them all.
     this.showMarkers = function () {
@@ -230,7 +228,7 @@ var ViewModel = function(map, bounds, largeInfowindow) {
         });
         
         map.fitBounds(bounds);
-    }
+    };
 
     // This function will loop through the listings and hide them all.
     this.hideMarkers = function () {
@@ -238,7 +236,7 @@ var ViewModel = function(map, bounds, largeInfowindow) {
         ko.utils.arrayForEach(self.markers(), function (item) {
             item.marker.setMap(null);
         });
-    }
+    };
 
     this.searchQuery = ko.observable('');
 
@@ -265,7 +263,7 @@ var ViewModel = function(map, bounds, largeInfowindow) {
             bounds.extend(item.position);
         });
         
-    }
+    };
 };
 
 // Display the map
