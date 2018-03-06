@@ -104,7 +104,7 @@ var animateMarker = function (marker) {
         }, 1450);
     }
 
-}
+};
 
 var populateInfoWindow = function (marker, infowindow) {
     
@@ -122,48 +122,6 @@ var populateInfoWindow = function (marker, infowindow) {
         infowindow.addListener('closeclick', function () {
             infowindow.setMarker = null;
         });
-
-        // var streetViewService = new google.maps.StreetViewService();
-        // var radius = 100;
-
-        // // In case the status is OK, which means the pano was found, compute the
-        // // position of the streetview image, then calculate the heading, then get a
-        // // panorama from that and set the options
-        // function getStreetView(data, status) {
-            
-        //     if (status == google.maps.StreetViewStatus.OK) {
-                
-        //         var nearStreetViewLocation = data.location.latLng;
-                
-        //         var heading = google.maps.geometry.spherical.computeHeading(
-        //             nearStreetViewLocation,
-        //             marker.position
-        //         );
-
-        //         infowindow.setContent('<div>' + marker.title + '</div></br><div id="pano"></div>');
-                
-        //         var panoramaOptions = {
-        //             position: nearStreetViewLocation,
-                    
-        //             pov: {
-        //                 heading: heading,
-        //                 pitch: 30
-        //             }
-        //         };
-                
-        //         var panorama = new google.maps.StreetViewPanorama(
-        //             document.getElementById('pano'), panoramaOptions
-        //         );
-
-        //     } else {
-        //         infowindow.setContent('<div>' + marker.title + '</div>' +
-        //                               '<div>No Street View Found</div>');
-        //     }
-        // }
-        
-        // // Use streetview service to get the closest streetview image within
-        // // 100 meters of the markers position
-        // streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
 
         // This functions adds a link on the infowindow
         // This links goes to the wikipedia page of the marker
@@ -197,7 +155,7 @@ var populateInfoWindow = function (marker, infowindow) {
         // Open the infowindow on the correct marker.
         infowindow.open(map, marker);
     }
-}
+};
 
 
 var addMarker = function (data, bounds, largeInfowindow) {
@@ -240,7 +198,7 @@ var addMarker = function (data, bounds, largeInfowindow) {
         // Open an infowindow at each marker
         new populateInfoWindow(this, thisNewMarker.largeInfowindow);
     });
-}
+};
 
 var ViewModel = function(map, bounds, largeInfowindow) {
     
@@ -308,7 +266,7 @@ var ViewModel = function(map, bounds, largeInfowindow) {
         });
         
     }
-}
+};
 
 // Display the map
 function initMap() {
