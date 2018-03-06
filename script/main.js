@@ -110,7 +110,7 @@ var animateMarker = function (marker) {
 // This links goes to the wikipedia page of the marker
 function getWikipedia (marker, infowindow) {
     
-    var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback'
+    var wikiUrl = 'https://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
     
     $.ajax({
         url: wikiUrl,
