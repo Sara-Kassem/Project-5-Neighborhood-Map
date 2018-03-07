@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title>The Seven Wonders of the World</title>
+
+        <!-- Bootstrap CSS CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="style/main.css">
+    </head>
+
+    <body>
+
+        <div class="wrapper">
+
+            <!-- Sidebar Holder -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>The Seven Wonders of the World</h3>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        
+                        <a href="#locationList" data-toggle="collapse" aria-expanded="false">
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                            List of Locations
+                        </a>
+                        
+                        <ul class="collapse list-unstyled" id="locationList" data-bind="foreach: searchResult">
+                            <li><a href="#" data-bind="click: $parent.showWindow(marker) ,text: title"></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" id="show-markers" data-bind="click: showMarkers">
+                            <i class="glyphicon glyphicon-eye-open"></i>
+                            Show Markers
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#" id="hide-markers" data-bind="with: markers, click: hideMarkers">
+                            <i class="glyphicon glyphicon-eye-close"></i>
+                            Hide Markers
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+
+            <!-- Page Content Holder -->
+            <div id="content">
+
+                <div id="upperNav">
+
+                    <div class="navbar-header" id="collapseButton">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i class="glyphicon glyphicon-menu-hamburger"></i>
+                        </button>
+                    </div>
+
+                    <div id="locationSearch">
+                        <input id="locationSearchinput" type="search" data-bind="value: searchQuery" placeholder="Search Places...">
+                        <button type="submit" id="locationSearchButton" data-bind="click: filterMarkers">
+                            <i class="glyphicon glyphicon-search" id="locationSearchIcon"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                <div id="map"></div>
+
+            </div>
+
+        </div>
+
+        <!-- jQuery CDN -->
+        <script src="script/jquery-3.3.1.min.js"></script>
+
+        <!-- Knockout Js CDN -->
+        <script src="script/knockout-min.js"></script>
+
+        <!-- Bootstrap Js CDN -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <!-- Custom Js -->
+        <script src="script/main.js"></script>
+
+        <!-- Google Maps API -->
+        <script async defer onerror="errorLoadingMap()"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDuQO6Wc2nHpPQSGBrtXyEmrndTkq2Uhww&libraries=geometry&v=3&callback=initMap">
+        </script>
+
+    </body>
+</html>
